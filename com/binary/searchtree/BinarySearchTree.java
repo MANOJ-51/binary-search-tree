@@ -23,6 +23,10 @@ public class BinarySearchTree<M extends Comparable<M>> {
         binarySearchTree.add(67);
         //size
         System.out.println("size of the binary search tree:" + binarySearchTree.size());
+        System.out.println("");
+
+        //search
+        System.out.println("search result :" + binarySearchTree.search(63));
 
         System.out.println("In Order Traversal:- left , root ,right ");
         binarySearchTree.inOrderTraversal(root);
@@ -99,6 +103,25 @@ public class BinarySearchTree<M extends Comparable<M>> {
 
     public int size() {
         return findSize(root);
+    }
+
+    //search recursiive method
+    public boolean searchRecurssive(MyBinaryNode<M> root, M key) {     //                 56
+        if (root == null) {                                           //         30               70
+            return false;                                              //    22     40        60        95
+        } else if (key.compareTo(root.key) == 0) {                   //   11                      65
+            return true;                                             // 3     16               63    67
+        } else {
+            if (key.compareTo(root.key) < 0) {
+                return searchRecurssive(root.left, key);
+            } else {
+                return searchRecurssive(root.right, key);
+            }
+        }
+    }
+
+    public boolean search(M key) {
+        return searchRecurssive(root, key);
     }
 
 }
